@@ -3,7 +3,7 @@ import os
 import tornado.ioloop
 import tornado.web
 import tornado.log
-
+import json
 import requests
 
 from jinja2 import \
@@ -22,15 +22,21 @@ class TemplateHandler(tornado.web.RequestHandler):
 class MainHandler(TemplateHandler):
   def get (self):
     # render input form
-    pass
+    self.render_template("weather_form.html", {})
+
 
   def post (self):
-    pass
     # get city name
+    city = self.get_body_argument('city')
+
+    r= requests.get('http://api.openweathermap.org/data/2.5/weather?q={}&APPID=e4e42da8e12b99936239ca5d5c23ad25'.format(city))
+    data = json.loads(r.text)
+    print(data)
 
     # lookup the weather
 
     # render the weather data
+    self.render_template("weather_form.html", {'data':data})
 
 def make_app():
   return tornado.web.Application([

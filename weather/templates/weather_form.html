@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <form action='' method='post'>
+          <div class="form-group">
+              <h1> What city would you like to know the weather for?</h1>
+            <label for="City">City:</label>
+
+            <span style="display: inline;">
+          <input type="submit" value="Submit"/> <input type="button" value="Cancel"/>
+        </span>
+            <input type="Which City" class="form-control" name="city">
+            {% if data %}
+            <h2>{{data.name}}
+            </h2>
+            <p>{{ data.weather[0].description }}</P>
+            <p> {{ data.weather[0].main}}</p>
+            {% endif %}
+          </div>
+    </body>
+</html>
